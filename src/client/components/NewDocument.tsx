@@ -95,7 +95,7 @@ export default function NewDocument(): React.ReactElement {
           onClick={() => navigate('/')}
           aria-label="Back"
         >
-          ←
+          <i className="bi bi-caret-left-fill" aria-hidden="true" />
         </button>
         <h1>{t('new_doc.title')}</h1>
         <div style={{ width: 40 }} />
@@ -113,7 +113,7 @@ export default function NewDocument(): React.ReactElement {
                 className="btn btn-outline btn-sm"
                 onClick={() => fileInputRef.current?.click()}
               >
-                📷 {t('new_doc.take_photo')}
+                <i className="bi bi-camera-fill" aria-hidden="true" /> {t('new_doc.take_photo')}
               </button>
             )}
           </div>
@@ -138,7 +138,7 @@ export default function NewDocument(): React.ReactElement {
                     onClick={() => removePhoto(idx)}
                     aria-label="Remove"
                   >
-                    ✕
+                    <i className="bi bi-x-lg" aria-hidden="true" />
                   </button>
                 </div>
               ))}
@@ -151,7 +151,7 @@ export default function NewDocument(): React.ReactElement {
               style={{ height: 100 }}
               onClick={() => fileInputRef.current?.click()}
             >
-              📷 {t('new_doc.take_photo')}
+              <i className="bi bi-camera-fill" aria-hidden="true" /> {t('new_doc.take_photo')}
             </button>
           )}
         </div>

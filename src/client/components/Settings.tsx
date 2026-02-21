@@ -98,7 +98,7 @@ export default function Settings(): React.ReactElement {
           onClick={() => navigate('/')}
           aria-label="Back"
         >
-          ←
+          <i className="bi bi-caret-left-fill" aria-hidden="true" />
         </button>
         <h1>{t('settings.title')}</h1>
         <div style={{ width: 40 }} />

@@ -11,7 +11,7 @@ export default function LoginScreen({ statusFromUrl }: Props): React.ReactElemen
 
   return (
     <div className="login-screen">
-      <div className="login-logo">📄</div>
+      <div className="login-logo"><i className="bi bi-file-earmark-text" aria-hidden="true" /></div>
       <h1 className="login-title">{t('app_name')}</h1>
       <p className="login-subtitle">Scan & Send Documents</p>
 

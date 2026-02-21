@@ -25,6 +25,7 @@
     "@fastify/static": "^8.0.0",
     "@fastify/view": "^10.0.0",
     "bcrypt": "^5.1.1",
+    "bootstrap-icons": "^1.13.1",
     "connect-pg-simple": "^10.0.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",

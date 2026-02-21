@@ -148,7 +148,7 @@ html, body {
 .btn-full { width: 100%; }
 .btn-lg { padding: 16px 24px; font-size: 1.1rem; }
 .btn-sm { padding: 6px 12px; font-size: 0.875rem; }
-.btn-icon { padding: 8px; border-radius: 50%; }
+.btn-icon { padding: 8px; border-radius: 50%; background: transparent; }
 
 /* Login Screen */
 .login-screen {

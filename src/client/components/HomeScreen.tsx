@@ -28,7 +28,7 @@ export default function HomeScreen(): React.ReactElement {
             onClick={() => navigate('/settings')}
             aria-label="Settings"
           >
-            ⚙️
+            <i className="bi bi-gear-fill" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default function HomeScreen(): React.ReactElement {
           style={{ marginBottom: 24 }}
           onClick={() => navigate('/new')}
         >
-          📷 {t('home.new_document')}
+          <i className="bi bi-camera-fill" aria-hidden="true" /> {t('home.new_document')}
         </button>
 
         <QueueList />
