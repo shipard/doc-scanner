@@ -1,0 +1,57 @@
+{
+  "app_name": "ScanDoc",
+  "login": {
+    "title": "Sign In",
+    "google": "Sign in with Google",
+    "pending": "Your account is pending approval. You will be notified by email.",
+    "suspended": "Your account has been suspended. Please contact an administrator."
+  },
+  "home": {
+    "new_document": "New Document",
+    "queue_title": "Upload Queue",
+    "sent_title": "Recently Sent",
+    "no_queue": "Queue is empty",
+    "no_sent": "No documents sent yet"
+  },
+  "new_doc": {
+    "title": "New Document",
+    "take_photo": "Take Photo",
+    "photo_count": "{{current}}/{{max}} photos",
+    "note_placeholder": "Note (optional)",
+    "recipient": "Recipient",
+    "no_recipients": "No recipients — add them in Settings",
+    "send": "Send",
+    "sending": "Sending...",
+    "sent_ok": "Document sent successfully",
+    "sent_offline": "Document will be sent when you're back online",
+    "min_photo": "Please add at least one photo",
+    "select_recipient": "Select recipient"
+  },
+  "queue": {
+    "status_pending": "Pending",
+    "status_sending": "Sending",
+    "status_failed": "Failed",
+    "retry": "Retry",
+    "photos": "{{count}} photos",
+    "photo": "{{count}} photo"
+  },
+  "settings": {
+    "title": "Settings",
+    "recipients": "Recipients",
+    "add_recipient": "Add Recipient",
+    "name": "Name",
+    "email": "Email",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "language": "Language",
+    "about": "About",
+    "version": "Version",
+    "logout": "Sign Out",
+    "edit": "Edit"
+  },
+  "errors": {
+    "network": "Network error. Please try again.",
+    "generic": "An error occurred."
+  }
+}

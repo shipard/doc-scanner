@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Document Logs</h2>
+  <span class="text-muted">Total: <%= total %></span>
+</div>
+
+<form class="d-flex gap-2 mb-3" method="get">
+  <select name="status" class="form-select form-select-sm" style="width:auto">
+    <option value="">All statuses</option>
+    <option value="received" <%= statusFilter === 'received' ? 'selected' : '' %>>Received</option>
+    <option value="processing" <%= statusFilter === 'processing' ? 'selected' : '' %>>Processing</option>
+    <option value="sent" <%= statusFilter === 'sent' ? 'selected' : '' %>>Sent</option>
+    <option value="failed" <%= statusFilter === 'failed' ? 'selected' : '' %>>Failed</option>
+  </select>
+  <button class="btn btn-sm btn-outline-secondary">Filter</button>
+  <a href="/admin/logs" class="btn btn-sm btn-outline-secondary">Reset</a>
+</form>
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Date</th>
+          <th>Sender</th>
+          <th>Recipient</th>
+          <th>Note</th>
+          <th>Photos</th>
+          <th>Status</th>
+          <th>Sent At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% logs.forEach(function(log) { %>
+          <tr>
+            <td><%= new Date(log.created_at).toLocaleString('cs-CZ') %></td>
+            <td><small><%= log.sender_name %><br><span class="text-muted"><%= log.sender_email %></span></small></td>
+            <td><small><%= log.recipient_name || '' %><br><span class="text-muted"><%= log.recipient_email %></span></small></td>
+            <td><small><%= log.note || '—' %></small></td>
+            <td><%= log.photo_count %></td>
+            <td>
+              <% if (log.status === 'sent') { %>
+                <span class="badge bg-success">Sent</span>
+              <% } else if (log.status === 'failed') { %>
+                <span class="badge bg-danger" title="<%= log.error_message || '' %>">Failed</span>
+              <% } else if (log.status === 'processing') { %>
+                <span class="badge bg-primary">Processing</span>
+              <% } else { %>
+                <span class="badge bg-secondary">Received</span>
+              <% } %>
+            </td>
+            <td><small><%= log.sent_at ? new Date(log.sent_at).toLocaleString('cs-CZ') : '—' %></small></td>
+          </tr>
+        <% }) %>
+        <% if (logs.length === 0) { %>
+          <tr><td colspan="7" class="text-center text-muted py-3">No logs found</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% if (pages > 1) { %>
+  <nav class="mt-3">
+    <ul class="pagination pagination-sm">
+      <% for (let i = 1; i <= pages; i++) { %>
+        <li class="page-item <%= i === page ? 'active' : '' %>">
+          <a class="page-link" href="?status=<%= statusFilter %>&page=<%= i %>"><%= i %></a>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+<% } %>

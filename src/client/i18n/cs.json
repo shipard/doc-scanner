@@ -1,0 +1,57 @@
+{
+  "app_name": "ScanDoc",
+  "login": {
+    "title": "Přihlásit se",
+    "google": "Přihlásit se přes Google",
+    "pending": "Váš účet čeká na schválení. Budete informováni e-mailem.",
+    "suspended": "Váš účet byl pozastaven. Kontaktujte administrátora."
+  },
+  "home": {
+    "new_document": "Nový doklad",
+    "queue_title": "Fronta k odeslání",
+    "sent_title": "Poslední odeslané",
+    "no_queue": "Fronta je prázdná",
+    "no_sent": "Zatím žádné odeslané doklady"
+  },
+  "new_doc": {
+    "title": "Nový doklad",
+    "take_photo": "Vyfotit",
+    "photo_count": "{{current}}/{{max}} fotek",
+    "note_placeholder": "Poznámka (volitelné)",
+    "recipient": "Příjemce",
+    "no_recipients": "Žádní příjemci — přidejte je v Nastavení",
+    "send": "Odeslat",
+    "sending": "Odesílám...",
+    "sent_ok": "Doklad byl odeslán",
+    "sent_offline": "Doklad bude odeslán, až budete online",
+    "min_photo": "Přidejte alespoň jednu fotku",
+    "select_recipient": "Vyberte příjemce"
+  },
+  "queue": {
+    "status_pending": "Čeká",
+    "status_sending": "Odesílám",
+    "status_failed": "Chyba",
+    "retry": "Zkusit znovu",
+    "photos": "{{count}} fotek",
+    "photo": "{{count}} fotka"
+  },
+  "settings": {
+    "title": "Nastavení",
+    "recipients": "Příjemci",
+    "add_recipient": "Přidat příjemce",
+    "name": "Jméno",
+    "email": "E-mail",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "language": "Jazyk",
+    "about": "O aplikaci",
+    "version": "Verze",
+    "logout": "Odhlásit se",
+    "edit": "Upravit"
+  },
+  "errors": {
+    "network": "Chyba sítě. Zkuste to znovu.",
+    "generic": "Nastala chyba."
+  }
+}

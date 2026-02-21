@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Users</h2>
+  <div class="d-flex gap-2">
+    <a href="/admin/users" class="btn btn-sm <%= statusFilter === '' ? 'btn-dark' : 'btn-outline-dark' %>">All</a>
+    <a href="/admin/users?status=active" class="btn btn-sm <%= statusFilter === 'active' ? 'btn-success' : 'btn-outline-success' %>">Active</a>
+    <a href="/admin/users?status=pending_approval" class="btn btn-sm <%= statusFilter === 'pending_approval' ? 'btn-warning' : 'btn-outline-warning' %>">Pending</a>
+    <a href="/admin/users?status=suspended" class="btn btn-sm <%= statusFilter === 'suspended' ? 'btn-danger' : 'btn-outline-danger' %>">Suspended</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Admin</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(function(user) { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+              <% if (user.status === 'active') { %>
+                <span class="badge bg-success">Active</span>
+              <% } else if (user.status === 'pending_approval') { %>
+                <span class="badge bg-warning text-dark">Pending</span>
+              <% } else { %>
+                <span class="badge bg-danger">Suspended</span>
+              <% } %>
+            </td>
+            <td>
+              <% if (user.is_admin) { %>
+                <span class="badge bg-primary">Admin</span>
+              <% } %>
+            </td>
+            <td><%= new Date(user.created_at).toLocaleDateString('cs-CZ') %></td>
+            <td>
+              <div class="d-flex gap-1 flex-wrap">
+                <% if (user.status === 'pending_approval') { %>
+                  <form action="/admin/users/<%= user.id %>/approve" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-success">Approve</button>
+                  </form>
+                  <form action="/admin/users/<%= user.id %>/suspend" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-danger">Reject</button>
+                  </form>
+                <% } else if (user.status === 'active') { %>
+                  <form action="/admin/users/<%= user.id %>/suspend" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-warning">Suspend</button>
+                  </form>
+                <% } else { %>
+                  <form action="/admin/users/<%= user.id %>/activate" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-success">Activate</button>
+                  </form>
+                <% } %>
+                <form action="/admin/users/<%= user.id %>/toggle-admin" method="post" class="d-inline">
+                  <button class="btn btn-sm btn-outline-primary"><%= user.is_admin ? 'Remove Admin' : 'Make Admin' %></button>
+                </form>
+                <button class="btn btn-sm btn-outline-danger"
+                  onclick="if(confirm('Delete user <%= user.email %>?')) { fetch('/admin/users/<%= user.id %>', {method:'DELETE'}).then(() => location.reload()) }">
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+        <% if (users.length === 0) { %>
+          <tr><td colspan="6" class="text-center text-muted py-3">No users found</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

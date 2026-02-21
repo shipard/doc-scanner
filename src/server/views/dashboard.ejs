@@ -1,0 +1,83 @@
+<h2 class="mb-4">Dashboard</h2>
+<% if (typeof adminName !== 'undefined' && adminName) { %>
+  <p class="text-muted">Welcome, <%= adminName %></p>
+<% } %>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="card border-success">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="text-muted small">Active Users</div>
+            <div class="fs-2 fw-bold text-success"><%= stats.activeUsers %></div>
+          </div>
+          <i class="bi bi-person-check text-success fs-1 opacity-25"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card border-warning">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="text-muted small">Pending Approval</div>
+            <div class="fs-2 fw-bold text-warning"><%= stats.pendingUsers %></div>
+          </div>
+          <i class="bi bi-person-exclamation text-warning fs-1 opacity-25"></i>
+        </div>
+        <% if (stats.pendingUsers > 0) { %>
+          <a href="/admin/users?status=pending_approval" class="btn btn-sm btn-warning mt-2">Review</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card border-primary">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="text-muted small">Docs Today / Total</div>
+            <div class="fs-2 fw-bold text-primary"><%= stats.docsToday %> / <%= stats.docsTotal %></div>
+          </div>
+          <i class="bi bi-file-pdf text-primary fs-1 opacity-25"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card border-info">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="text-muted small">Pending Invites</div>
+            <div class="fs-2 fw-bold text-info"><%= stats.pendingInvites %></div>
+          </div>
+          <i class="bi bi-envelope-open text-info fs-1 opacity-25"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Quick Actions</h5>
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="/admin/users?status=pending_approval" class="btn btn-warning btn-sm">
+            <i class="bi bi-person-exclamation"></i> Review Pending Users
+          </a>
+          <a href="/admin/invites" class="btn btn-primary btn-sm">
+            <i class="bi bi-envelope-plus"></i> Create Invite
+          </a>
+          <a href="/admin/logs" class="btn btn-secondary btn-sm">
+            <i class="bi bi-journal-text"></i> View Logs
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
