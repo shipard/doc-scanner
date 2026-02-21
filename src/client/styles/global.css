@@ -416,3 +416,34 @@ html, body {
 .recipient-info { flex: 1; }
 .recipient-name { font-weight: 500; font-size: 0.9rem; }
 .recipient-email { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* Install Banner */
+.install-banner {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 568px;
+  background: var(--primary);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+.install-banner__text { flex: 1; font-size: 14px; }
+.install-banner__btn {
+  background: white; color: var(--primary); border: none;
+  border-radius: 8px; padding: 8px 16px; font-weight: 600;
+  font-size: 14px; cursor: pointer; white-space: nowrap;
+}
+.install-banner__dismiss {
+  background: none; border: none; color: white;
+  font-size: 22px; cursor: pointer; padding: 0 4px;
+  line-height: 1; opacity: 0.8;
+}
+.install-banner__dismiss:hover { opacity: 1; }

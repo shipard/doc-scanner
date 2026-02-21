@@ -53,5 +53,10 @@
   "errors": {
     "network": "Network error. Please try again.",
     "generic": "An error occurred."
+  },
+  "install": {
+    "message": "Install ScanDoc for quick access",
+    "button": "Install",
+    "dismiss": "Dismiss"
   }
 }

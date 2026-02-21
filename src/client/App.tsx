@@ -5,6 +5,7 @@ import LoginScreen from './components/LoginScreen';
 import HomeScreen from './components/HomeScreen';
 import NewDocument from './components/NewDocument';
 import Settings from './components/Settings';
+import InstallBanner, { BeforeInstallPromptEvent } from './components/InstallBanner';
 
 export const UserContext = React.createContext<{
   user: User | null;
@@ -15,6 +16,8 @@ export default function App(): React.ReactElement {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<string | null>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [installDismissed, setInstallDismissed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,6 +47,16 @@ export default function App(): React.ReactElement {
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (window.matchMedia('(display-mode: standalone)').matches) return;
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as unknown as BeforeInstallPromptEvent);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
   if (loading) {
     return (
       <div className="loading-screen">
@@ -52,10 +65,19 @@ export default function App(): React.ReactElement {
     );
   }
 
+  const installBanner = deferredPrompt && !installDismissed ? (
+    <InstallBanner
+      deferredPrompt={deferredPrompt}
+      onInstall={() => setDeferredPrompt(null)}
+      onDismiss={() => setInstallDismissed(true)}
+    />
+  ) : null;
+
   if (!user || user.status === 'pending_approval') {
     return (
       <UserContext.Provider value={{ user, setUser }}>
         <LoginScreen statusFromUrl={status} />
+        {installBanner}
       </UserContext.Provider>
     );
   }
@@ -69,6 +91,7 @@ export default function App(): React.ReactElement {
         <Route path="/invite/:token" element={<HomeScreen />} />
         <Route path="*" element={<HomeScreen />} />
       </Routes>
+      {installBanner}
     </UserContext.Provider>
   );
 }

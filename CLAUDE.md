@@ -66,6 +66,7 @@ src/
       Settings.tsx        # Správa příjemců (localStorage), jazyk, odhlášení
       QueueList.tsx       # IndexedDB fronta, retry tlačítko
       LanguageSwitcher.tsx # CZ/EN přepínač
+      InstallBanner.tsx   # PWA install prompt (beforeinstallprompt, Chrome/Android)
     services/
       api.ts              # fetch wrapper: uploadDocument, getDocuments, getMe
       queue.ts            # IndexedDB CRUD (idb): addToQueue, updateQueueItem, ...
@@ -78,8 +79,13 @@ src/
     styles/
       global.css          # Mobilní CSS (safe-area, PWA optimalizace)
 
+    public/
+      icons/              # icon-192.png, icon-512.png (generováno skriptem)
+      screenshots/        # screenshot-mobile.png (390×844), screenshot-wide.png (1280×800)
+
 scripts/
   create-admin.ts         # tsx scripts/create-admin.ts --email=x@y.z
+  generate-icons.js       # Generátor PNG ikon a screenshotů (čistý Node.js, bez závislostí)
 ```
 
 ---
@@ -116,6 +122,19 @@ scripts/
 - Cache-first: statické assety (images, fonts)
 - Network-first: `/api/*`, `/auth/*`
 - Offline fallback: vrátí `/index.html`
+
+### PWA Install prompt
+- `beforeinstallprompt` event zachycen v `App.tsx` (useEffect, singleton)
+- Pokud app běží v standalone módu → listener se nespustí
+- Stav (`deferredPrompt`, `installDismissed`) v `App.tsx`, předán do `InstallBanner`
+- iOS Safari `beforeinstallprompt` nepodporuje → banner se nezobrazí (expected)
+- Dismiss je session-only (bez localStorage)
+
+### PWA Manifest
+- `manifestFilename: 'manifest.json'` v `vite.config.ts` — musí odpovídat `<link rel="manifest">` v `index.html`
+- Výchozí název souboru vite-plugin-pwa je `manifest.webmanifest` (pozor na neshodu!)
+- Screenshoty v manifestu: `form_factor: narrow` (390×844) + `form_factor: wide` (1280×800)
+- Ikony generovány skriptem `scripts/generate-icons.js` (čistý Node.js, zlib + CRC32)
 
 ---
 
@@ -181,4 +200,4 @@ npm run create-admin -- --email=tvuj@email.cz
 
 - `tsc -p tsconfig.server.json` → 0 chyb
 - `tsc -p tsconfig.client.json` → 0 chyb
-- `vite build` → 251 kB JS, SW s Workbox precache
+- `vite build` → 252 kB JS, SW s Workbox precache (7 položek vč. ikon)

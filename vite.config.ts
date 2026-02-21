@@ -15,6 +15,7 @@ export default defineConfig({
       srcDir: '.',
       filename: 'sw.ts',
       strategies: 'injectManifest',
+      manifestFilename: 'manifest.json',
       injectManifest: {
         swSrc: 'src/client/sw.ts',
         swDest: 'dist/client/sw.js',
@@ -37,6 +38,22 @@ export default defineConfig({
             src: '/icons/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
+          },
+        ],
+        screenshots: [
+          {
+            src: '/screenshots/screenshot-mobile.png',
+            sizes: '390x844',
+            type: 'image/png',
+            form_factor: 'narrow',
+            label: 'ScanDoc – mobilní zobrazení',
+          },
+          {
+            src: '/screenshots/screenshot-wide.png',
+            sizes: '1280x800',
+            type: 'image/png',
+            form_factor: 'wide',
+            label: 'ScanDoc – zobrazení na desktopu',
           },
         ],
       },

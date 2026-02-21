@@ -53,5 +53,10 @@
   "errors": {
     "network": "Chyba sítě. Zkuste to znovu.",
     "generic": "Nastala chyba."
+  },
+  "install": {
+    "message": "Nainstalujte ScanDoc pro rychlý přístup",
+    "button": "Instalovat",
+    "dismiss": "Zavřít"
   }
 }
