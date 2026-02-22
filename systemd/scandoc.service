@@ -1,0 +1,15 @@
+[Unit]
+Description=ScanDoc Application
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=scandoc
+WorkingDirectory=/opt/scandoc
+ExecStart=/usr/bin/node dist/server/index.js
+Restart=on-failure
+RestartSec=5
+EnvironmentFile=/opt/scandoc/.env
+
+[Install]
+WantedBy=multi-user.target
