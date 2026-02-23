@@ -5,11 +5,11 @@ After=network.target postgresql.service
 [Service]
 Type=simple
 User=scandoc
-WorkingDirectory=/opt/scandoc
+WorkingDirectory=/opt/doc-scanner
 ExecStart=/usr/bin/node dist/server/index.js
 Restart=on-failure
 RestartSec=5
-EnvironmentFile=/opt/scandoc/.env
+EnvironmentFile=/opt/doc-scanner/.env
 
 [Install]
 WantedBy=multi-user.target
